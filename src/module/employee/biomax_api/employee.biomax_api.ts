@@ -6,6 +6,7 @@ const create = async (data: Employee_Biomax_Api_Create_Type) => {
 
     try {
         const result = await biomax_axios_instance.post("/api/v2/WebAPI/AddEmployee", data);
+        console.log(result.data);
         return true;
     } catch (error) {
         console.error(error);
