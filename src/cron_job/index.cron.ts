@@ -49,38 +49,38 @@ export const index_cron_job_function = async (
 
     // await Attendance_Service.import_attendance_to_erpnext_from_biomax_for_specific_date(new Date('2025-01-25'));
     // await Attendance_Service.import_attendance_to_erpnext_from_biomax_for_specific_date(new Date('2025-01-26'));
-    cron.schedule('* * * * *', async () => {
+    // cron.schedule('* * * * *', async () => {
 
-        console.log(`${new Date().toISOString()} Cron job started\n\n`)
+    //     console.log(`${new Date().toISOString()} Cron job started\n\n`)
 
-        //Importing and updating Location from ERPNext to Biomax
-        await Location_Service.import_location_to_biomax_from_erpnext();
+    //     //Importing and updating Location from ERPNext to Biomax
+    //     await Location_Service.import_location_to_biomax_from_erpnext();
 
-        await Location_Service.update_location_data_in_biomax_from_erpnext();
+    //     await Location_Service.update_location_data_in_biomax_from_erpnext();
 
-        //Importing and updating Device from ERPNext to Biomax
-        await Device_Service.import_device_to_erpnext_from_biomax();
+    //     //Importing and updating Device from ERPNext to Biomax
+    //     await Device_Service.import_device_to_erpnext_from_biomax();
 
-        await Device_Service.update_device_in_erpnext();
+    //     await Device_Service.update_device_in_erpnext();
 
-        //Importing and updating Employee from ERPNext to Biomax
-        await Employee_Service.import_employee_to_biomax_from_erpnext_via_biomax_api();
+    //     //Importing and updating Employee from ERPNext to Biomax
+    //     await Employee_Service.import_employee_to_biomax_from_erpnext_via_biomax_api();
 
-        //Removing Employee from Devices
-        await Employee_Service.remove_employee_from_devices();
+    //     //Removing Employee from Devices
+    //     await Employee_Service.remove_employee_from_devices();
 
-        //Removing Employee from Devices with status left or inactive
-        await Employee_Service.remove_employee_from_devices_with_status_left_or_inactive();
+    //     //Removing Employee from Devices with status left or inactive
+    //     await Employee_Service.remove_employee_from_devices_with_status_left_or_inactive();
 
-        //Adding Employee to Devices
-        await Employee_Service.add_employee_to_devices();
+    //     //Adding Employee to Devices
+    //     await Employee_Service.add_employee_to_devices();
 
-        //Importing Attendance from Biomax to ERPNext
-        await Attendance_Service.import_attendance_to_erpnext_from_biomax();
+    //     //Importing Attendance from Biomax to ERPNext
+    //     await Attendance_Service.import_attendance_to_erpnext_from_biomax();
 
-        console.log(`${new Date().toISOString()} Cron job ended\n\n`)
+    //     console.log(`${new Date().toISOString()} Cron job ended\n\n`)
 
-    });
+    // });
 };
 
 /*
