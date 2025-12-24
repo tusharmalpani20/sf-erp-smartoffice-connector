@@ -86,6 +86,12 @@ const import_employee_to_biomax_from_erpnext_via_biomax_api = async () => {
 
     for await (const employee of employee_erpnext_list.data.employees) {
 
+        if(employee.id != 'SF-00908'){
+            continue;
+        }
+
+        console.log(employee.id, employee.employee_name);
+
         if (!employee.attendance_device_id) {
 
             const location_details = employee.custom_point && location_erpnext_id_map[employee.custom_point] ? location_erpnext_id_map[employee.custom_point] : null;
