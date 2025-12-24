@@ -208,7 +208,11 @@ const import_employee_to_biomax_from_erpnext_via_biomax_api = async () => {
 
 
     if (employee_with_biomax_id_list.length > 0) {
-        await Employee_Erp_Api.update_employee_id(employee_with_biomax_id_list);
+        const chunkSize = 500;
+        for (let i = 0; i < employee_with_biomax_id_list.length; i += chunkSize) {
+            const chunk = employee_with_biomax_id_list.slice(i, i + chunkSize);
+            await Employee_Erp_Api.update_employee_id(chunk);
+        }
     };
 
     console.info(`${new Date().toLocaleString()}\t Importing employee to Biomax from ERPNext completed`);
