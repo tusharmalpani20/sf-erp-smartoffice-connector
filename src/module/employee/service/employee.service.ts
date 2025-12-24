@@ -86,7 +86,7 @@ const import_employee_to_biomax_from_erpnext_via_biomax_api = async () => {
 
     for await (const employee of employee_erpnext_list.data.employees) {
 
-        if(employee.id != 'SF-00908'){
+        if(employee.id!== 'SF-00908' && employee.id!== 'SF-00837'){
             continue;
         }
 
