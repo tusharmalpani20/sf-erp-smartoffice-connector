@@ -86,11 +86,11 @@ const import_employee_to_biomax_from_erpnext_via_biomax_api = async () => {
 
     for await (const employee of employee_erpnext_list.data.employees) {
 
-        if(employee.id!== 'SF-00908' && employee.id!== 'SF-00837'){
-            continue;
-        }
+        // if(employee.id!== 'SF-00908' && employee.id!== 'SF-00837'){
+        //     continue;
+        // }
 
-        console.log(employee.id, employee.employee_name);
+        // console.log(employee.id, employee.employee_name);
 
         if (!employee.attendance_device_id) {
 
@@ -214,7 +214,7 @@ const import_employee_to_biomax_from_erpnext_via_biomax_api = async () => {
 
 
     if (employee_with_biomax_id_list.length > 0) {
-        const chunkSize = 50;
+        const chunkSize = 500;
         for (let i = 0; i < employee_with_biomax_id_list.length; i += chunkSize) {
             const chunk = employee_with_biomax_id_list.slice(i, i + chunkSize);
             await Employee_Erp_Api.update_employee_id(chunk);
