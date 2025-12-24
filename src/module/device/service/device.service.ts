@@ -16,73 +16,71 @@ const import_device_to_erpnext_from_biomax = async () => {
     console.info(`${new Date().toLocaleString()}\t Importing device to ERPNext from Biomax`);
 
     const device_biomax_list = await Device_Model.get_all() as IResult<Device_Biomax_Type>;
-    console.log(device_biomax_list.recordset.length);
-    return ;
 
-    // const device_erpnext_list = await Device_Erp_Api.get_all() as {
-    //     status: string,
-    //     message: string,
-    //     data: {
-    //         devices: Device_Erpnext_Type[]
-    //     }
-    // };
+    const device_erpnext_list = await Device_Erp_Api.get_all() as {
+        status: string,
+        message: string,
+        data: {
+            devices: Device_Erpnext_Type[]
+        }
+    };
 
-    // //get location list from erp
-    // const location_erpnext_list = await Location_Erp_Api.get_all() as {
-    //     status: string,
-    //     message: string,
-    //     data: {
-    //         points: Location_Erpnext_Type[]
-    //     }
-    // };
+    //get location list from erp
+    const location_erpnext_list = await Location_Erp_Api.get_all() as {
+        status: string,
+        message: string,
+        data: {
+            points: Location_Erpnext_Type[]
+        }
+    };
 
-    // //make a map of location name 
-    // const location_erpnext_biomax_id_map: {
-    //     [key: string]: Location_Erpnext_Type
-    // } = {};
+    //make a map of location name 
+    const location_erpnext_biomax_id_map: {
+        [key: string]: Location_Erpnext_Type
+    } = {};
 
-    // for await (const location of location_erpnext_list.data.points) {
-    //     location.smart_office_id && (location_erpnext_biomax_id_map[location.smart_office_id] = location);
-    // };
+    for await (const location of location_erpnext_list.data.points) {
+        location.smart_office_id && (location_erpnext_biomax_id_map[location.smart_office_id] = location);
+    };
 
-    // //if a device is not in the device_erpnext_list, then create it
-    // const create_device_list: Device_Erpnext_Create_Type[] = [];
+    //if a device is not in the device_erpnext_list, then create it
+    const create_device_list: Device_Erpnext_Create_Type[] = [];
 
-    // for await (const device_biomax of device_biomax_list.recordset) {
-    //     if (!device_erpnext_list.data.devices.find((device: Device_Erpnext_Type) => device.biometric_device_id && device.biometric_device_id == device_biomax.DeviceId.toString())) {
+    for await (const device_biomax of device_biomax_list.recordset) {
+        if (!device_erpnext_list.data.devices.find((device: Device_Erpnext_Type) => device.biometric_device_id && device.biometric_device_id == device_biomax.DeviceId.toString())) {
 
-    //         let location_name = ( 
-    //             device_biomax.DeviceLocation 
-    //             && 
-    //             location_erpnext_biomax_id_map[device_biomax.DeviceLocation] 
-    //         ) ? location_erpnext_biomax_id_map[device_biomax.DeviceLocation].id : "";
+            let location_name = ( 
+                device_biomax.DeviceLocation 
+                && 
+                location_erpnext_biomax_id_map[device_biomax.DeviceLocation] 
+            ) ? location_erpnext_biomax_id_map[device_biomax.DeviceLocation].id : "";
 
-    //         create_device_list.push({
-    //             biometric_device_id: device_biomax.DeviceId.toString(),
-    //             device_name: device_biomax.DeviceFName,
-    //             serial_number: device_biomax.SerialNumber,
-    //             device_model: device_biomax.DeviceModel,
-    //             device_vendor: device_biomax.DeviceVendor,
-    //             device_type: device_biomax.DeviceType,
-    //             point: location_name,
-    //             device_direction: device_biomax.DeviceDirection,
-    //             connection_type: device_biomax.ConnectionType,
-    //             ip_address: device_biomax.IpAddress,
-    //             last_ping_time: device_biomax.LastPing ? (sql_date_format(device_biomax.LastPing) as any as Date) : null,
-    //             is_real_time: device_biomax.IsRealTime,
-    //             device_info: device_biomax.DeviceInfo,
-    //             user_count: device_biomax.UserCount,
-    //             finger_print_count: device_biomax.FPCount,
-    //             server_url: device_biomax.ServerURL,
-    //         });
-    //     };
-    // };
+            create_device_list.push({
+                biometric_device_id: device_biomax.DeviceId.toString(),
+                device_name: device_biomax.DeviceFName,
+                serial_number: device_biomax.SerialNumber,
+                device_model: device_biomax.DeviceModel,
+                device_vendor: device_biomax.DeviceVendor,
+                device_type: device_biomax.DeviceType,
+                point: location_name,
+                device_direction: device_biomax.DeviceDirection,
+                connection_type: device_biomax.ConnectionType,
+                ip_address: device_biomax.IpAddress,
+                last_ping_time: device_biomax.LastPing ? (sql_date_format(device_biomax.LastPing) as any as Date) : null,
+                is_real_time: device_biomax.IsRealTime,
+                device_info: device_biomax.DeviceInfo,
+                user_count: device_biomax.UserCount,
+                finger_print_count: device_biomax.FPCount,
+                server_url: device_biomax.ServerURL,
+            });
+        };
+    };
 
-    // if (create_device_list.length > 0) {
-    //     await Device_Erp_Api.create(create_device_list);
-    // }
+    if (create_device_list.length > 0) {
+        await Device_Erp_Api.create(create_device_list);
+    }
 
-    // console.info(`${new Date().toLocaleString()}\t Importing device to ERPNext from Biomax completed`);
+    console.info(`${new Date().toLocaleString()}\t Importing device to ERPNext from Biomax completed`);
 
 }
 
