@@ -8,6 +8,8 @@
     "start": "env-cmd -f .env-cmdrc -e development ts-node-dev  --ignore-watch='node_modules/*' --ignore-watch='build/*' src/index.ts",
     "start:prod": "env-cmd -f .env-cmdrc -e production ts-node-dev  src/index.ts",
     "start:prod:pm2": "env-cmd -f .env-cmdrc -e production pm2 start pm2.config.js",
+    "start:prod:2": "env-cmd -f .env-cmdrc -e production_2 ts-node-dev  src/index.ts",
+    "start:prod:2:pm2": "env-cmd -f .env-cmdrc -e production_2 pm2 start pm2.config.js",
     "start:remote_test": "env-cmd -f .env-cmdrc -e remote_test ts-node-dev  src/index.ts",
     "start:remote_test_2": "env-cmd -f .env-cmdrc -e remote_test_2 ts-node-dev  src/index.ts",
     "build": "tsc"
