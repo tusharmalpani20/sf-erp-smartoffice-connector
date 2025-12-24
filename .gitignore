@@ -1,0 +1,16 @@
+build
+.vscode
+node_modules
+
+#environment variables
+.env-cmdrc
+pm2.config.js
+
+#generate them using generateKeypair.js file
+id_rsa_priv.pem
+id_rsa_pub.pem
+
+#folders to ignore
+
+##deployment script
+deploy.sh
