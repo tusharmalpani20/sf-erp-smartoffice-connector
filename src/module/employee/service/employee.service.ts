@@ -100,16 +100,16 @@ const import_employee_to_biomax_from_erpnext_via_biomax_api = async () => {
                 StaffCode: employee.id,
                 StaffName: employee.employee_name,
                 Gender: employee.gender as "Male" | "Female" | "Other",
-                Location: location_details ? location_details.id : "Default",
+                // Location: location_details ? location_details.id : "Default",
                 Status: "Working",
                 CompanySName: "Default",
-                CategorySName: "Default",
-                HolidayGroupCode: "Default",
-                ShiftGroupCode: "Default",
-                DepartmentSName: "Default",
-                Grade: "Default",
-                Team: "Default",
-            });
+                // CategorySName: "Default",
+                // HolidayGroupCode: "Default",
+                // ShiftGroupCode: "Default",
+                // DepartmentSName: "Default",
+                // Grade: "Default",
+                // Team: "Default",
+            } as any);
         };
     };
 
